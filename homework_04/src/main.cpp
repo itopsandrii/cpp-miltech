@@ -27,6 +27,9 @@ int main(int argc, char** argv) {
 
     std::string line;
     int row = 0;
+
+    double x=0.0, y = 0.0, theta = 0.0; 
+
     while (std::getline(file, line)) {
         int fl, fr, bl, br;
         long long timestamp;
@@ -53,5 +56,18 @@ int main(int argc, char** argv) {
 
         dist_left = (( delta_fl + delta_bl ) / 2.0)*(2*M_PI*WHEEL_RADIUS) / TICKS_PER_REV;
         dist_right = (( delta_fr + delta_br ) /2.0)*(2*M_PI*WHEEL_RADIUS) / TICKS_PER_REV ;
+
+        double dist_center;
+        double delta_theta;
+
+        dist_center = ( dist_left + dist_right ) / 2;
+        delta_theta = (dist_right - dist_left) / WHEELBASE;
+
+
+        x+= dist_center * std::cos(theta + delta_theta / 2);
+        y+= dist_center * std::sin(theta + delta_theta / 2);
+        theta += delta_theta;
+
+
     }
 }
