@@ -3,6 +3,8 @@
 #include <sstream>
 #include <string>
 #include <cmath>
+#include <iomanip>
+
 
 
 int main(int argc, char** argv) {
@@ -18,7 +20,7 @@ int main(int argc, char** argv) {
 
     std::ifstream file(argv[1]);
     if (!file.is_open()) {
-        std::cout << "error can not open file" << argv[1] << std::endl; 
+        std::cout << "error can not open file" << argv[1] << "\n"; 
         return 1;
     }
 
@@ -29,6 +31,8 @@ int main(int argc, char** argv) {
     int row = 0;
 
     double x=0.0, y = 0.0, theta = 0.0; 
+
+    std::cout << std::fixed << std::setprecision(6);
 
     while (std::getline(file, line)) {
         int fl, fr, bl, br;
@@ -68,6 +72,9 @@ int main(int argc, char** argv) {
         y+= dist_center * std::sin(theta + delta_theta / 2);
         theta += delta_theta;
 
+        if (row > 1) {
+            std::cout << timestamp << " " << x << " " << y << " " << theta << "\n";
+        }
 
     }
 }
