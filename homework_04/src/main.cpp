@@ -21,8 +21,31 @@ int main(int argc, char** argv) {
         return 1;
     }
 
+    int prev_fl = 0, prev_fr = 0, prev_bl = 0, prev_br = 0;
+    long long prev_timestamp = 0;
+
     std::string line;
+    int row = 0;
     while (std::getline(file, line)) {
+        int fl, fr, bl, br;
+        long long timestamp;
+
+        std::istringstream ss(line);
+
+        ss >> timestamp >> fl >> fr >> bl >> br;
+
+        int delta_fl, delta_fr, delta_br, delta_bl;
         
+        delta_fl = fl - prev_fl;
+        delta_fr = fr - prev_fr;
+        delta_bl = bl - prev_bl;
+        delta_br = br - prev_br;
+
+        prev_fl = fl;
+        prev_fr = fr;
+        prev_bl = bl;
+        prev_br = br;
+
+        row++;
     }
 }
