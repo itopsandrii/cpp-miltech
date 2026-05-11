@@ -1,4 +1,8 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+
 
 int main(int argc, char** argv) {
     // The program expects exactly one argument: a path to telemetry samples.
@@ -7,17 +11,18 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    // TODO: implement wheel odometry for a 4-wheel differential-drive UGV.
-    //
-    // Model parameters:
-    //   ticks_per_revolution = 1024
-    //   wheel_radius_m       = 0.3
-    //   wheelbase_m          = 1.0
-    //
-    // Input: a text file with 5 whitespace-separated values per line:
-    //         timestamp_ms fl_ticks fr_ticks bl_ticks br_ticks
-    // Output: a table on stdout, starting from the second sample:
-    //         timestamp_ms x y theta
+    const int TICKS_PER_REV   = 1024;
+    const double WHEEL_RADIUS = 0.3;
+    const double WHEELBASE    = 1.0;
 
-    return 0;
+    std::ifstream file(argv[1]);
+    if (!file.is_open()) {
+        std::cout << "error can not open file" << argv[1] << std::endl; 
+        return 1;
+    }
+
+    std::string line;
+    while (std::getline(file, line)) {
+        
+    }
 }
