@@ -25,7 +25,6 @@ int main(int argc, char** argv) {
     }
 
     int prev_fl = 0, prev_fr = 0, prev_bl = 0, prev_br = 0;
-    long long prev_timestamp = 0;
 
     std::string line;
     int row = 0;
