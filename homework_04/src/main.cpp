@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <cmath>
 
 
 int main(int argc, char** argv) {
@@ -47,5 +48,10 @@ int main(int argc, char** argv) {
         prev_br = br;
 
         row++;
+
+        double dist_left, dist_right;
+
+        dist_left = (( delta_fl + delta_bl ) / 2.0)*(2*M_PI*WHEEL_RADIUS) / TICKS_PER_REV;
+        dist_right = (( delta_fr + delta_br ) /2.0)*(2*M_PI*WHEEL_RADIUS) / TICKS_PER_REV ;
     }
 }
