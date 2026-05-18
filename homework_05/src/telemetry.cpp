@@ -43,7 +43,8 @@ long parse_long(const char* text) {
     const long value = std::strtol(text, &end, 10);
 
     if (end == text) {
-        std::abort();
+        std::cerr << "error: invalid numeric value in input\n";
+        std::exit(1);
     }
 
     return value;
@@ -58,7 +59,8 @@ double parse_double(const char* text) {
     const double value = std::strtod(text, &end);
 
     if (end == text) {
-        std::abort();
+        std::cerr << "error: invalid numeric value in input\n";
+        std::exit(1);
     }
 
     return value;
