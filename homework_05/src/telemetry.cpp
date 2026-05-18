@@ -70,7 +70,7 @@ Frame parse_frame(char line[]) {
     char* fields[EXPECTED_FIELD_COUNT] = {};
     const int field_count = split_line(line, fields, EXPECTED_FIELD_COUNT);
     if (field_count !=7) {
-        std::cerr << " error: Incorrect number of frames: expected 7 fields\n";
+        std::cerr << "error: Incorrect number of frames: expected 7 fields\n";
         std::exit(1);
     }
 
@@ -120,6 +120,10 @@ int read_frames(const char* path, Frame frames[], int max_frames) {
 }
 
 Summary summarize(const Frame frames[], int frame_count) {
+    if (frame_count == 0) {
+        std::cerr << "error: no frames in input file\n";
+        std::exit(1); 
+    }
     Summary summary{};
     summary.frames_total = frame_count;
     summary.frames_valid = frame_count;
