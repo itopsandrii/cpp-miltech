@@ -67,7 +67,10 @@ double parse_double(const char* text) {
 Frame parse_frame(char line[]) {
     char* fields[EXPECTED_FIELD_COUNT] = {};
     const int field_count = split_line(line, fields, EXPECTED_FIELD_COUNT);
-    (void)field_count;
+    if (field_count !=7) {
+        std::cerr << " error: Incorrect number of frames: expected 7 fields\n";
+        std::exit(1);
+    }
 
     Frame frame{};
     frame.timestamp_ms = parse_long(fields[0]);
