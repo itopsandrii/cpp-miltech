@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <stdexcept>
+#include <numbers>
 
 DropSolution compute_drop_solution(const BallisticsInput &input)
 {
@@ -38,7 +39,6 @@ DropSolution compute_drop_solution(const BallisticsInput &input)
     throw std::invalid_argument("unknown ammo: " + input.ammo_name);
   }
   const double g = 9.81;
-  const double pi = 3.14159265358979323846;
 
   double v0 = input.attack_speed;
   double z0 = input.drone_z;
@@ -61,7 +61,7 @@ DropSolution compute_drop_solution(const BallisticsInput &input)
 
   double phi = std::acos(cos_arg);
 
-  double t = 2.0 * std::sqrt(-p / 3.0) * std::cos((phi + 4.0 * pi) / 3.0) - b_eq / (3.0 * a_eq);
+  double t = 2.0 * std::sqrt(-p / 3.0) * std::cos((phi + 4.0 * std::numbers::pi) / 3.0) - b_eq / (3.0 * a_eq);
 
   if (t <= 0.0) {
     throw std::runtime_error("no valid flight time");
