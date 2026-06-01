@@ -17,12 +17,9 @@ target_compile_options(ballistics_cli PRIVATE -Wall -Wextra -pedantic)
 if(NOT CMAKE_CROSSCOMPILING)
     include(FetchContent)
     FetchContent_Declare(
-        googletest
-        URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
-        DOWNLOAD_EXTRACT_TIMESTAMP TRUE 
-    )
+        googletest URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
+                       DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
     FetchContent_MakeAvailable(googletest)
-
 
     include(GoogleTest)
     add_executable(ballistics_tests tests/ballistics_tests.cpp)
