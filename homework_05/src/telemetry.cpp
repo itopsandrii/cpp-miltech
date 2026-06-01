@@ -43,7 +43,8 @@ long parse_long(const char* text) {
     const long value = std::strtol(text, &end, 10);
 
     if (end == text) {
-        std::abort();
+        std::cerr << "error: invalid numeric value in input\n";
+        std::exit(1);
     }
 
     return value;
@@ -58,7 +59,8 @@ double parse_double(const char* text) {
     const double value = std::strtod(text, &end);
 
     if (end == text) {
-        std::abort();
+        std::cerr << "error: invalid numeric value in input\n";
+        std::exit(1);
     }
 
     return value;
@@ -67,7 +69,10 @@ double parse_double(const char* text) {
 Frame parse_frame(char line[]) {
     char* fields[EXPECTED_FIELD_COUNT] = {};
     const int field_count = split_line(line, fields, EXPECTED_FIELD_COUNT);
-    (void)field_count;
+    if (field_count !=7) {
+        std::cerr << "error: Incorrect number of frames: expected 7 fields\n";
+        std::exit(1);
+    }
 
     Frame frame{};
     frame.timestamp_ms = parse_long(fields[0]);
@@ -82,6 +87,10 @@ Frame parse_frame(char line[]) {
 
 double compute_frame_rate_hz(const Frame frames[], int frame_count) {
     const long elapsed_ms = frames[frame_count - 1].timestamp_ms - frames[0].timestamp_ms;
+    if (elapsed_ms ==0 ) {
+        std::cerr << "error: zero time delta between frames, cannot compute frame rate\n";
+        std::exit(1);
+    }
 
     return static_cast<double>((frame_count - 1) * 1000 / elapsed_ms);
 }
@@ -111,6 +120,10 @@ int read_frames(const char* path, Frame frames[], int max_frames) {
 }
 
 Summary summarize(const Frame frames[], int frame_count) {
+    if (frame_count == 0) {
+        std::cerr << "error: no frames in input file\n";
+        std::exit(1); 
+    }
     Summary summary{};
     summary.frames_total = frame_count;
     summary.frames_valid = frame_count;
