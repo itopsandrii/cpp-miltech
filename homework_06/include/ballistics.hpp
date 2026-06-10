@@ -1,0 +1,21 @@
+#pragma once
+
+#include <string>
+
+struct BallisticsInput {
+  double drone_x = 0.0;
+  double drone_y = 0.0;
+  double drone_z = 0.0;
+  double target_x = 0.0;
+  double target_y = 0.0;
+  double attack_speed = 0.0;
+  double acceleration_path = 0.0;
+  std::string ammo_name;
+};
+
+struct DropSolution {
+  double fire_x = 0.0;
+  double fire_y = 0.0;
+};
+
+DropSolution compute_drop_solution(const BallisticsInput& input);
